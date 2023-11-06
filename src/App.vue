@@ -12,7 +12,7 @@ import HelloWorld from './components/HelloWorld.vue'
       width="125"
       height="125"
     />
-
+  s
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
