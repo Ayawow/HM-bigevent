@@ -1,7 +1,12 @@
 <script setup></script>
 
 <template>
-  <div></div>
-</template>
+  <page-container title="文章管理">
+    <template #extra>
+      <el-button type="primary">发布文章</el-button>
+    </template>
 
+    主体部分
+  </page-container>
+</template>
 <style lang="scss"></style>

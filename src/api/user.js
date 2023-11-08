@@ -9,3 +9,9 @@ export const userRegisterService = ({ username, password, repassword }) => {
 export const userLoginService = ({ username, password }) => {
   return instance.post('/api/login', { username, password })
 }
+
+//获取用户信息
+
+export const userGetUserInfoService = () => {
+  return instance.get('/my/userinfo')
+}
