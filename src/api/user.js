@@ -15,3 +15,29 @@ export const userLoginService = ({ username, password }) => {
 export const userGetUserInfoService = () => {
   return instance.get('/my/userinfo')
 }
+
+//更新个人信息
+
+export const userUpdateUserInfoService = ({ id, nickname, email }) => {
+  return instance.put('/my/userinfo', {
+    id,
+    nickname,
+    email
+  })
+}
+
+//更新头像
+
+export const userUpdateAvatarService = (avatar) => {
+  return instance.patch('/my/update/avatar', {
+    avatar
+  })
+}
+
+export const userUpdatePasswordService = ({ old_pwd, new_pwd, re_pwd }) => {
+  return instance.patch('/my/updatepwd', {
+    old_pwd,
+    new_pwd,
+    re_pwd
+  })
+}

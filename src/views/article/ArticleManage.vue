@@ -1,7 +1,7 @@
 <script setup>
 import { Delete, Edit } from '@element-plus/icons-vue'
 import { ref } from 'vue'
-import { artGetListService } from '@/api/article.js'
+import { artGetListService, artDelArticleService } from '@/api/article.js'
 import { formatTime } from '@/utils/format.js'
 
 const loading = ref(false)
@@ -60,8 +60,25 @@ const onEditArticle = (row) => {
   articleEditRef.value.open(row)
 }
 
-const onDeleteArticle = (row) => {
-  console.log(row)
+const onDeleteArticle = async (row) => {
+  await ElMessageBox.confirm('你确认删除该文章信息吗？', '温馨提示', {
+    type: 'warning',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
+  })
+  await artDelArticleService(row.id)
+  ElMessage({ type: 'success', message: '删除成功' })
+  getArticleList()
+}
+
+const onSuccess = (type) => {
+  if (type === 'add') {
+    // 如果是添加，需要跳转渲染最后一页，编辑直接渲染当前页
+    //Math.ceil 向上去整
+    const lastPage = Math.ceil((total.value + 1) / params.value.pagesize)
+    params.value.pagenum = lastPage
+  }
+  getArticleList()
 }
 </script>
 
@@ -135,7 +152,7 @@ const onDeleteArticle = (row) => {
       style="margin-top: 20px; justify-content: flex-end"
     />
     <!-- 抽屉 -->
-    <article-edit ref="articleEditRef"></article-edit>
+    <article-edit ref="articleEditRef" @success="onSuccess"></article-edit>
   </page-container>
 </template>
 <style lang="scss"></style>

@@ -29,5 +29,24 @@ export const artGetListService = (params) =>
 
 //发布文章
 
-export const artPubilshService = (data) =>
+export const artPublishService = (data) =>
   instance.post('/my/article/add', data)
+
+//获取文章内容
+
+export const artGetArticleService = (id) =>
+  instance.get('/my/article/info', {
+    params: { id }
+  })
+
+//编辑文章
+
+export const artEditArticleService = (data) =>
+  instance.put('/my/article/info', data)
+
+//删除文章
+
+export const artDelArticleService = (id) =>
+  instance.delete('/my/article/info', {
+    params: { id }
+  })
